@@ -2,70 +2,58 @@ package RedisCLI.java.Commands;
 
 import RedisCLI.java.Entity.ZsetEntity;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.HashMap;
+import java.util.SortedSet;
 
 public class Zrange {
-    private static boolean validateInput(String[] input)
-    {
-        if(input.length != 4 && input.length != 5)
-        {
+    private static boolean validateInput(String[] input) {
+        if (input.length != 4 && input.length != 5) {
             System.out.println("(error) ERR wrong number of arguments for 'zrange' command");
             return false;
         }
         return true;
     }
 
-    public static void execute(String[] input, HashMap<String, SortedSet<ZsetEntity>> map)
-    {
-        if(!validateInput(input))
-        {
+    public static void execute(String[] input, HashMap<String, SortedSet<ZsetEntity>> map) {
+        if (!validateInput(input)) {
             return;
-        }
-        else
-        {
+        } else {
             String zkey = input[1];
-            if(map.containsKey(zkey))
-            {
+            if (map.containsKey(zkey)) {
                 SortedSet<ZsetEntity> sortedSet = map.get(zkey);
-
-                int ind_start=Integer.parseInt(input[2]),ind_end=Integer.parseInt(input[3]);
-                if(ind_start<0)
-                    ind_start+=sortedSet.size();
-                if(ind_end<0)
-                    ind_end+=(sortedSet.size());
-                if(ind_end>sortedSet.size()-1)
-                    ind_end = sortedSet.size()-1;
-                if(ind_start < 0)
+                int SET_SIZE = sortedSet.size();
+                int ind_start = Integer.parseInt(input[2]), ind_end = Integer.parseInt(input[3]);
+                if (ind_start < 0)
+                    ind_start += SET_SIZE;
+                if (ind_end < 0)
+                    ind_end += (SET_SIZE);
+                if (ind_end > SET_SIZE - 1)
+                    ind_end = SET_SIZE - 1;
+                if (ind_start < 0)
                     ind_start = 0;
-                if(ind_start>ind_end)
-                {
+                if (ind_start > ind_end) {
                     System.out.println("(nil)");
                     return;
                 }
 
-                    if(input.length == 5)
-                    {
-                        int j=1;
-                        for (int i = ind_start; i <= ind_end; i++) {
-                            System.out.println(j + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getKey());
-                            j++;
-                            System.out.println(j + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getValue());
-                            j++;
-                        }
+                Object[] sortedSetArray =  (sortedSet.toArray());
+                if (input.length == 5) {
+                    int j = 1;
+                    for (int i = ind_start; i <= ind_end; i++) {
+                        System.out.println(j + ")" + ((ZsetEntity) (sortedSetArray)[i]).getKey());
+                        j++;
+                        System.out.println(j + ")" + ((ZsetEntity) (sortedSetArray)[i]).getValue());
+                        j++;
                     }
-                    else
-                    {
-                        for (int i = ind_start; i <= ind_end; i++) {
-                            System.out.println(i + 1 + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getKey());
+                } else {
+                    for (int i = ind_start; i <= ind_end; i++) {
+                        System.out.println(i + 1 + ")" + ((ZsetEntity) (sortedSetArray)[i]).getKey());
 
-                        }
                     }
+                }
 
 
-            }
-            else
-            {
+            } else {
                 System.out.println("(nil)");
             }
             return;

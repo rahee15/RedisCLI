@@ -3,16 +3,16 @@ package RedisCLI.java.Entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
-public class ZsetEntity implements Serializable,Comparable {
+public class ZsetEntity implements Serializable, Comparable {
     @JsonProperty
-    String key;
+    private String key;
     @JsonProperty
-    Integer value;
+    private Integer value;
 
     public ZsetEntity() {
     }
+
     public ZsetEntity(String key, Integer value) {
         this.key = key;
         this.value = value;
@@ -37,7 +37,7 @@ public class ZsetEntity implements Serializable,Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return getKey().compareTo(((ZsetEntity)o).getKey());
+        return getKey().compareTo(((ZsetEntity) o).getKey());
 
     }
 }
