@@ -44,11 +44,22 @@ public class Zrange {
                     return;
                 }
 
-
-                    for(int i=ind_start;i<=ind_end;i++)
+                    if(input.length == 5)
                     {
-                        System.out.println(((ZsetEntity)(sortedSet.toArray())[i]).getKey());
+                        int j=1;
+                        for (int i = ind_start; i <= ind_end; i++) {
+                            System.out.println(j + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getKey());
+                            j++;
+                            System.out.println(j + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getValue());
+                            j++;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = ind_start; i <= ind_end; i++) {
+                            System.out.println(i + 1 + ")" + ((ZsetEntity) (sortedSet.toArray())[i]).getKey());
 
+                        }
                     }
 
 
