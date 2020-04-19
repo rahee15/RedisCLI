@@ -1,6 +1,6 @@
 #RedisCLI
 
-This JAVA project describes working of GET,SET,EXPIRE,ZADD,ZRANK,ZRANGE commands of RedisCLI.
+This JAVA project describes working of GET,SET,EXPIRE,ZADD,ZRANK,ZRANGE commands of RedisCLI.For deep understanding of the working of commands run these commands on redisCLI.
 
 #Project Run
 1) Clone or download the repository
