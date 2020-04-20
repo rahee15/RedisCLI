@@ -10,3 +10,8 @@ This JAVA project describes working of GET,SET,EXPIRE,ZADD,ZRANK,ZRANGE commands
 3) Add Jars to classpath
 4) compile the project.
 5) Run the main file.
+
+*(Unacadamy)
+The answers of questions are given here (https://github.com/rahee15/RedisCLI/blob/master/Redis.pdf).
+This implementetion is updated on 20-april-2020.
+
