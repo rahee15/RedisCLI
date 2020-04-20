@@ -37,7 +37,7 @@ public class ZsetEntity implements Serializable, Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return getKey().compareTo(((ZsetEntity) o).getKey());
+        return getValue() - (((ZsetEntity) o).getValue());
 
     }
 }

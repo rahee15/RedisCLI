@@ -24,11 +24,16 @@ public class Zrank {
             if (map.containsKey(zkey)) {
                 SortedSet<ZsetEntity> sortedSet = map.get(zkey);
                 String key = input[2];
-                Integer index = Util.binarySearch(sortedSet.toArray(), 0, sortedSet.size() - 1, key);
-                if (index != -1)
-                    System.out.println("(integer) " + index);
-                else
-                    System.out.println("(nil)");
+                Object[] sortedSetArray =  (sortedSet.toArray());
+                for(int i=0;i<sortedSetArray.length;i++)
+                {
+                    if(((ZsetEntity)(sortedSetArray[i])).getKey().equals(key))
+                    {
+                        System.out.println("(integer) " + i);
+                        return;
+                    }
+                }
+                System.out.println("(nil)");
             } else {
                 System.out.println("(nil)");
             }

@@ -50,7 +50,7 @@ public class RedisCLI {
                     Expire.execute(inputArray, map);
                     break;
                 case "ZADD":
-                    Zadd.execute(inputArray, zSet);
+                    Zadd.execute(inputArray,map,zSet);
                     break;
                 case "ZRANK":
                     Zrank.execute(inputArray, zSet);

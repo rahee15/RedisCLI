@@ -28,11 +28,16 @@ public class Zadd {
         return true;
     }
 
-    public static void execute(String[] input, HashMap<String, SortedSet<ZsetEntity>> map) {
+    public static void execute(String[] input, HashMap<String, String> simple_map,HashMap<String, SortedSet<ZsetEntity>> map) {
         if (!validateInput(input)) {
             return;
         } else {
             String zkey = input[1];
+            if(simple_map.containsKey(zkey))
+            {
+                System.out.println("(error) WRONGTYPE Operation against a key holding the wrong kind of value");
+                return;
+            }
             if (!map.containsKey(zkey)) {
                 SortedSet<ZsetEntity> sm =
                         new TreeSet<>(new ZsetComparator());
@@ -43,12 +48,11 @@ public class Zadd {
             for (int i = 2; i < input.length - 1; i = i + 2) {
                 Integer value = Integer.parseInt(input[i]);
                 String key = input[i + 1];
-                Integer index = Util.binarySearch(sortedSet.toArray(), 0, sortedSet.size() - 1, key);
-                if (index == -1) {
+
                     ZsetEntity entity = new ZsetEntity(key, value);
                     sortedSet.add(entity);
                     count_exec++;
-                }
+
 
             }
             System.out.println("(integer) " + (count_exec));
